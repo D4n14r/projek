@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Yahoo Stock Analysis Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="bg-primary text-white py-4">
+    <div class="container-fluid px-4">
+      <div class="row align-items-center">
+        <div class="col-md-8">
+          <h1 class="mb-1">Yahoo Stock Analysis Dashboard</h1>
+          <p class="mb-0">Interactive visualization and analysis of historical stock data (2015–2018)</p>
+        </div>
+        <div class="col-md-4 text-md-end">
+          <p class="mb-0 fw-semibold">Developed by: <span class="fw-normal">[Your Name]</span></p>
+          <p class="mb-0">Data Source: Yahoo Finance Historical Data</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="container my-5">
+    <!-- Data Overview -->
+    <section class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <h2 class="h4 mb-0">Data Overview</h2>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <h5>Date Range</h5>
+            <p>November 23, 2015 – April 22, 2018</p>
+            <h5>Data Points</h5>
+            <p>881 daily records</p>
+          </div>
+          <div class="col-md-6">
+            <h5>Key Metrics</h5>
+            <ul>
+              <li><strong>High:</strong> 2095.61 – 2872.87</li>
+              <li><strong>Low:</strong> 1857.83 – 2588.26</li>
+              <li><strong>Volume:</strong> 1.41B – 7.60B</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chart Section -->
+    <section class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <h2 class="h4 mb-0">Stock Performance</h2>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-8 mb-3 mb-md-0">
+            <div class="chart-container" style="position: relative; height:400px;">
+              <canvas id="stockChart" aria-label="Stock Performance Chart"></canvas>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="mb-3">
+              <label for="metricSelect" class="form-label">Select Metric</label>
+              <select id="metricSelect" class="form-select">
+                <option value="Close">Closing Price</option>
+                <option value="Open">Opening Price</option>
+                <option value="High">Daily High</option>
+                <option value="Low">Daily Low</option>
+                <option value="Volume">Trading Volume</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="dateRange" class="form-label">Date Range</label>
+              <input type="text" id="dateRange" class="form-control" readonly>
+            </div>
+            <button id="updateChart" class="btn btn-primary w-100 mb-3">Update Chart</button>
+            <div class="stats-box">
+              <h5>Current Statistics</h5>
+              <p id="currentValue">Current: -</p>
+              <p id="minValue">Min: -</p>
+              <p id="maxValue">Max: -</p>
+              <p id="avgValue">Avg: -</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Analysis Tools -->
+    <section class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <h2 class="h4 mb-0">Analysis Tools</h2>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6 mb-3 mb-md-0">
+            <h5>Moving Averages</h5>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="ma7">
+              <label class="form-check-label" for="ma7">7-day MA</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="ma30">
+              <label class="form-check-label" for="ma30">30-day MA</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="ma90">
+              <label class="form-check-label" for="ma90">90-day MA</label>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <h5>Technical Indicators</h5>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="rsi">
+              <label class="form-check-label" for="rsi">RSI (14-day)</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="macd">
+              <label class="form-check-label" for="macd">MACD</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="bollinger">
+              <label class="form-check-label" for="bollinger">Bollinger Bands</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-4 mt-auto">
+    <div class="container-fluid px-4">
+      <div class="row">
+        <div class="col-md-6">
+          <h5>About This Dashboard</h5>
+          <p>This interactive dashboard provides visualization and analysis tools for historical Yahoo stock data from 2015–2018.</p>
+        </div>
+        <div class="col-md-6">
+          <h5>Data Information</h5>
+          <p>Includes Open, High, Low, Close, Volume, and Adjusted Close prices.</p>
+          <p>Last updated: <strong>[Date]</strong></p>
+        </div>
+      </div>
+      <div class="text-center pt-3 border-top mt-3">
+        <p class="mb-0">&copy; 2023 Yahoo Stock Analysis Dashboard. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
